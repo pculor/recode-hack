@@ -2,253 +2,298 @@
   "ApplicationName": "MoveIt",
   "DisplayName": "MoveIt Blockchain for Tether Logistics",
   "Description": "Blockchain App for the Shipping Business",
-  "ApplicationRoles": [{
-          "Name": "Shipper",
-          "Description": "User that moves asset from the store house to the Retailer"
-      },
-      {
-          "Name": "Retailer",
-          "Description": "User whose goods needs to be shipped"
-      },
-      {
-          "Name": "Authorities",
-          "Description": "User that inspects the shipment and Releases consignment on inspection at Retailer's Port"
-      }
+  "ApplicationRoles": [
+    {
+      "Name": "Shipper",
+      "Description": "User that moves asset from the store house to the Retailer"
+    },
+    {
+      "Name": "Retailer",
+      "Description": "User whose goods needs to be shipped"
+    },
+    {
+      "Name": "Authorities",
+      "Description": "User that inspects the shipment and Releases consignment on inspection at Retailer's Port"
+    }
   ],
-  "Workflows": [{
+  "Workflows": [
+    {
       "Name": "MoveIt",
       "DisplayName": "MoveIt Blockchain for Tether Logistics",
       "Description": "Handles the business logic for goods shipment",
-      "Initiators": ["InstanceRetailer"],
+      "Initiators": [
+        "InstanceRetailer"
+      ],
       "StartState": "Active",
-      "Properties": [{
-              "Name": "State",
-              "DisplayName": "State",
-              "Description": "Holds the state of the contract",
-              "Type": {
-                  "Name": "state"
-              }
-          },
-          {
-              "Name": "Description",
-              "DisplayName": "Description",
-              "Description": "Describes the goods been shipped",
-              "Type": {
-                  "Name": "string"
-              }
-          },
-          {
-              "Name": "PackingList",
-              "DisplayName": "Packing List",
-              "Description": "Description of the contents of the packaged goods",
-              "Type": {
-                  "Name": "money"
-              }
-          },
-          {
-              "Name": "InstanceRetailer",
-              "DisplayName": "Instance Retailer",
-              "Description": "The user that places an offer for this asset",
-              "Type": {
-                  "Name": "Retailer"
-              }
-          },
-          {
-              "Name": "InstanceShipper",
-              "DisplayName": "Instance Shipper",
-              "Description": "The user that ships this asset",
-              "Type": {
-                  "Name": "Shipper"
-              }
-          },
-          {
-              "Name": "InstanceAuthority",
-              "DisplayName": "Instance Authority",
-              "Description": "The user that Inspects the asset at Retailer's Home Country",
-              "Type": {
-                  "Name": "Authority"
-              }
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract",
+          "Type": {
+            "Name": "state"
           }
+        },
+        {
+          "Name": "Description",
+          "DisplayName": "Description",
+          "Description": "Describes the Request for Quotation from Retailer",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "PackingList",
+          "DisplayName": "Packing List",
+          "Description": "Description of the contents of the packaged goods",
+          "Type": {
+            "Name": "money"
+          }
+        },
+        {
+          "Name": "InstanceRetailer",
+          "DisplayName": "Instance Retailer",
+          "Description": "The user that makes the Request for Quotation",
+          "Type": {
+            "Name": "Retailer"
+          }
+        },
+        {
+          "Name": "InstanceShipper",
+          "DisplayName": "Instance Shipper",
+          "Description": "The user that ships this consignment",
+          "Type": {
+            "Name": "Shipper"
+          }
+        },
+        {
+          "Name": "InstanceAuthority",
+          "DisplayName": "Instance Authority",
+          "Description": "The user that inspects the shipment and Releases consignment on inspection at Retailer's Port",
+          "Type": {
+            "Name": "Authority"
+          }
+        }
       ],
       "Constructor": {
-          "Parameters": [{
-                  "Name": "purchase_order",
-                  "Description": "The description of the goods",
-                  "DisplayName": "Purchase Order",
-                  "Type": {
-                      "Name": "string"
-                  }
-              },
-
-              {
-                  "Name": "packing_list",
-                  "Description": "The Description about the contents of a packaged assets",
-                  "DisplayName": "Packing List",
-                  "Type": {
-                      "Name": "string"
-                  }
-              },
-              {
-                  "Name": "bill_of_lading",
-                  "Description": "The cost of shipping the asset",
-                  "DisplayName": "Bill of Lading",
-                  "Type": {
-                      "Name": "money"
-                  }
-              },
-              {
-                  "Name": "form_m",
-                  "Description": "Document that monitors imported goods",
-                  "DisplayName": "Form M",
-                  "Type": {
-                      "Name": "strings"
-                  }
-              }
-          ]
-      },
-      "Functions": [{
-              "Name": "request",
-              "DisplayName": "Request for Quotation",
-              "Description": "Make a Request for BOL quotation",
-              "Parameters": [{
-                  "Name": "packing_list",
-                  "Description": "The Description about the contents of a packaged assets",
-                  "DisplayName": "Packing List",
-                  "Type": {
-                      "Name": "string"
-                  }
-              }]
-          },
+        "Parameters": [
           {
-              "Name": "response",
-              "DisplayName": "Agreed Bill of Lading",
-              "Description": "Bill of Lading Settled",
-              "Parameters": [
-
-                  {
-                      "Name": "AcceptOffer",
-                      "DisplayName": "Accept Offer",
-                      "Description": "Accept the user's offer",
-                      "Parameters": []
-                  }
-              ],
-              "States": [{
-                      "Name": "Active",
-                      "DisplayName": "Active",
-                      "Description": "The initial state before BOL is agreed",
-                      "PercentComplete": 20,
-                      "Style": "Success",
-                      "Transitions": [{
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceShipper"],
-                              "Description": "Reject the offer",
-                              "Function": "Reject",
-                              "NextStates": ["Active"],
-                              "DisplayName": "Reject"
-                          },
-                          {
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceShipper"],
-                              "Description": "Sends the Bill Of Lading",
-                              "Function": "OfferSubmitted",
-                              "NextStates": ["OfferAccepted"],
-                              "DisplayName": "OfferSubmitted"
-                          }
-
-                      ]
-                  },
-
-                  {
-                      "Name": "OfferAccepted",
-                      "DisplayName": "Offer Accepted",
-                      "Description": "Bill of Lading sent to the Retailer",
-                      "PercentComplete": 30,
-                      "Style": "Success",
-                      "Transitions": [{
-                              "AllowedRoles": ["InstanceRetailer"],
-                              "AllowedInstanceRoles": [],
-                              "Description": "Reject the offer",
-                              "Function": "Reject",
-                              "NextStates": ["OfferAccepted"],
-                              "DisplayName": "Reject"
-                          },
-                          {
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceShipper"],
-                              "Description": "Modifies the Bill of Laden",
-                              "Function": "Modify",
-                              "NextStates": ["OfferAccepted"],
-                              "DisplayName": "Modify"
-                          },
-                          {
-                              "AllowedRoles": ["InstanceRetailer"],
-                              "AllowedInstanceRoles": [],
-                              "Description": "Accepts the BOL and makes payment",
-                              "Function": "BOLPaid",
-                              "NextStates": ["AcceptedandPaid"],
-                              "DisplayName": "BOLPaid"
-                          }
-                      ]
-                  },
-                  {
-                      "Name": "AcceptedandPaid",
-                      "DisplayName": "BOL Settled",
-                      "Description": "Goods Shipped",
-                      "PercentComplete": 50,
-                      "Style": "Success",
-                      "Transitions": [{
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceAuthority"],
-                              "Description": "Ship not arrived at ETA",
-                              "Function": "NotSeen",
-                              "NextStates": ["AcceptedandPaid"],
-                              "DisplayName": "NotSeen"
-                          },
-                          {
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceAuthority"],
-                              "Description": "Receives ship at the port",
-                              "Function": "ShipSeen",
-                              "NextStates": ["Clearing"],
-                              "DisplayName": "ShipSeen"
-                          }
-                      ]
-                  },
-                  {
-                      "Name": "Clearing",
-                      "DisplayName": "DocsSent",
-                      "Description": "Necessary Docs uploaded to blockchain",
-                      "PercentComplete": 70,
-                      "Style": "Success",
-                      "Transitions": [{
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceAuthority"],
-                              "Description": "Rejects the Documents",
-                              "Function": "Rejected",
-                              "NextStates": ["Clearing"],
-                              "DisplayName": "Rejected"
-                          },
-                          {
-                              "AllowedRoles": [],
-                              "AllowedInstanceRoles": ["InstanceAuthority"],
-                              "Description": "Mark these docs accepted ",
-                              "Function": "MarkAccepted",
-                              "NextStates": ["Release"],
-                              "DisplayName": "Mark Accepted"
-                          },
-                          {
-                              "Name": "Release",
-                              "DisplayName": "ShipReleased",
-                              "Description": "Goods in Retailer's Custody",
-                              "PercentComplete": 100,
-                              "Style": "Success",
-                              "Transitions": []
-                          }
-                      ]
-                  }
-              ]
+            "Name": "bill_of_lading",
+            "Description": "The cost of shipping the goods",
+            "DisplayName": "Bill of Lading",
+            "Type": {
+              "Name": "money"
+            }
           }
-      ]
-
-  }]
+        ]
+      },
+      "Functions": [
+        {
+          "Name": "NotSeen",
+          "Description": "Alerts the App that Shipment not seen as at ETA",
+          "DisplayName": "Shipment Not Seen",
+          "Parameters": []
+        },
+        {
+          "Name": "ShipSeen",
+          "Description": "Notifies the application that consignment arrived",
+          "DisplayName": "Shipment Seen",
+          "Parameters": []
+        },
+        {
+          "Name": "Reject",
+          "DisplayName": "Reject",
+          "Description": "Reject the user's offer",
+          "Parameters": []
+        },
+        {
+          "Name": "MarkAccepted",
+          "DisplayName": "Accept Offer",
+          "Description": "Accept the user's offer",
+          "Parameters": []
+        },
+        {
+          "Name": "OfferSubmitted",
+          "DisplayName": "Offer Submitted",
+          "Description": "Receives a Request for Quotation from Retailer",
+          "Parameters": []
+        },
+        {
+          "Name": "Modify",
+          "DisplayName": "Modify BOL",
+          "Description": "Used to modify BOL description and price",
+          "Parameters": [
+            {
+              "Name": "bill_of_lading",
+              "Description": "The cost of shipping the asset",
+              "DisplayName": "Bill of Lading",
+              "Type": {
+                "Name": "money"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "BOLPaid",
+          "DisplayName": "BOL Settled",
+          "Description": "Bill of Lading Settled",
+          "Parameters": []
+        }
+      ],
+          "States": [
+            {
+              "Name": "Active",
+              "DisplayName": "Active",
+              "Description": "The initial state after Request for Quotation is made",
+              "PercentComplete": 20,
+              "Style": "Success",
+              "Transitions": [
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceShipper"
+                  ],
+                  "Description": "Reject the offer",
+                  "Function": "Reject",
+                  "NextStates": [
+                    "Active"
+                  ],
+                  "DisplayName": "Reject"
+                },
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceShipper"
+                  ],
+                  "Description": "Sends the Bill Of Lading",
+                  "Function": "OfferSubmitted",
+                  "NextStates": [
+                    "OfferAccepted"
+                  ],
+                  "DisplayName": "OfferSubmitted"
+                }
+              ]
+            },
+            {
+              "Name": "OfferAccepted",
+              "DisplayName": "Offer Accepted",
+              "Description": "Bill of Lading sent to the Retailer",
+              "PercentComplete": 30,
+              "Style": "Success",
+              "Transitions": [
+                {
+                  "AllowedRoles": [
+                    "InstanceRetailer"
+                  ],
+                  "AllowedInstanceRoles": [],
+                  "Description": "Reject the offer",
+                  "Function": "Reject",
+                  "NextStates": [
+                    "OfferAccepted"
+                  ],
+                  "DisplayName": "Reject"
+                },
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceShipper"
+                  ],
+                  "Description": "Modifies the Bill of Laden",
+                  "Function": "Modify",
+                  "NextStates": [
+                    "OfferAccepted"
+                  ],
+                  "DisplayName": "Modify"
+                },
+                {
+                  "AllowedRoles": [
+                    "InstanceRetailer"
+                  ],
+                  "AllowedInstanceRoles": [],
+                  "Description": "Accepts the BOL and makes payment",
+                  "Function": "BOLPaid",
+                  "NextStates": [
+                    "AcceptedandPaid"
+                  ],
+                  "DisplayName": "BOLPaid"
+                }
+              ]
+            },
+            {
+              "Name": "AcceptedandPaid",
+              "DisplayName": "BOL Settled",
+              "Description": "Goods Shipped",
+              "PercentComplete": 50,
+              "Style": "Success",
+              "Transitions": [
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceAuthority"
+                  ],
+                  "Description": "Ship not arrived at ETA",
+                  "Function": "NotSeen",
+                  "NextStates": [
+                    "AcceptedandPaid"
+                  ],
+                  "DisplayName": "NotSeen"
+                },
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceAuthority"
+                  ],
+                  "Description": "Receives ship at the port",
+                  "Function": "ShipSeen",
+                  "NextStates": [
+                    "Clearing"
+                  ],
+                  "DisplayName": "ShipSeen"
+                }
+              ]
+            },
+            {
+              "Name": "Clearing",
+              "DisplayName": "DocsSent",
+              "Description": "Necessary Docs uploaded to blockchain",
+              "PercentComplete": 70,
+              "Style": "Success",
+              "Transitions": [
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceAuthority"
+                  ],
+                  "Description": "Rejects the Documents",
+                  "Function": "Reject",
+                  "NextStates": [
+                    "Clearing"
+                  ],
+                  "DisplayName": "Reject"
+                },
+                {
+                  "AllowedRoles": [],
+                  "AllowedInstanceRoles": [
+                    "InstanceAuthority"
+                  ],
+                  "Description": "Mark these docs accepted ",
+                  "Function": "MarkAccepted",
+                  "NextStates": [
+                    "Release"
+                  ],
+                  "DisplayName": "Mark Accepted"
+                },
+                {
+                  "Name": "Release",
+                  "DisplayName": "ShipReleased",
+                  "Description": "Goods in Retailer's Custody",
+                  "PercentComplete": 100,
+                  "Style": "Success",
+                  "Transitions": []
+                }
+              ]
+            }
+          ]
+        }
+  ]
 }
