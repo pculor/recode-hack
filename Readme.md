@@ -63,9 +63,10 @@ The follwing instructions will install the project on your local machine
 2. ReactJS
 
 ### Dependencies
-* Postgres
+* Azure
+* Blob SQL (Azure)
 * Node
-* Ibm Watson
+* Blockchain
 
 
 ## Features
@@ -79,6 +80,19 @@ The user interface is built for easy navigation and use of the application. It i
 - Token is perpetually verified to check the state of the user if logged in or not.
 - Admin User will br pre-seeded into the application with administrative priviledges
 
+### States
+Active, Reject, OfferAccepted, AcceptedandPaid, Clearing, Release* "Inspected"
+
+### Properties
+address public (InstanceOwner);
+    string public (Description);
+    uint public (AskingPrice);
+    StateType public (State);
+
+    address public (InstanceBuyer);
+    uint public (OfferPrice);
+    address public (InstanceInspector);
+    address public (InstanceAppraiser);
 
 ## Deployment
 
