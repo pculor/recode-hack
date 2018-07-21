@@ -81,11 +81,7 @@ The user interface is built for easy navigation and use of the application. It i
 - Admin User will br pre-seeded into the application with administrative priviledges
 
 ### States
-* Active
-* "Terminated"
-* "OfferPlaced"
-* "PendingInspection"
-* "Inspected"
+Active, Reject, OfferAccepted, AcceptedandPaid, Clearing, Release* "Inspected"
 
 ### Properties
 address public (InstanceOwner);
