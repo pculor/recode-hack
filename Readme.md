@@ -14,7 +14,7 @@ Tether-Business is a fullstack javascript web application that tethers the gap b
    ..*[prerequisites](#prerequisites "Prerequisites")
    ..*[Installation](#installation "Installation")
 2. [Technology Stack](#technology-stack)
-   ..* [Dependencies](#dependencies)
+   ..[Dependencies](#dependencies "dependencies")
 2. [Features](#features "Features")
 3. [Built With](#built-with "Built With")
 4. [Deployment](#deployment "Deployment")
