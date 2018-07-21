@@ -4,6 +4,9 @@
   "description": "Logistic management and tracking application",
   "main": "app.js",
   "scripts": {
+    "start": "babel-node app.js",
+    "build": "babel server -d server/dist --copy-files --ignore server/dist",
+    "lint": "eslint --fix server/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,22 @@
   "bugs": {
     "url": "https://github.com/pculor/recode-hack/issues"
   },
-  "homepage": "https://github.com/pculor/recode-hack#readme"
+  "homepage": "https://github.com/pculor/recode-hack#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "solc": "^0.4.24",
+    "web3": "^0.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
 }
