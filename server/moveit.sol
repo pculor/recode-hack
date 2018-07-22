@@ -1,8 +1,31 @@
 pragma solidity ^0.4.20;
 
-contract MoveIt {
-    enum StateType {Active, OfferAccepted, AcceptedandPaid, Clearing, Release}
-    address public PackingList;
+contract WorkbenchBase {
+    event WorkbenchContractCreated(string applicationName, string workflowName, address originatingAddress);
+    event WorkbenchContractUpdated(string applicationName, string workflowName, string action, address originatingAddress);
+
+    string internal ApplicationName;
+    string internal WorkflowName;
+
+    
+    function WorkbenchBase(string applicationName, string workflowName) internal 
+    {
+        ApplicationName = applicationName;
+        WorkflowName = workflowName;
+    }
+
+    function ContractCreated() internal {
+        WorkbenchContractCreated(ApplicationName, WorkflowName, msg.sender);
+    }
+
+    function ContractUpdated(string action) internal {
+        WorkbenchContractUpdated(ApplicationName, WorkflowName, action, msg.sender);
+    }
+}
+
+contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
+    enum StateType {Active, AcceptedandPaid, Clearing, Release, Terminated}
+    string public PackingList;
     string public Description;
     uint public price;
     StateType public State;
@@ -11,43 +34,55 @@ contract MoveIt {
     address public InstanceShipper;
     address public InstanceAuthority;
     
-    
-    function Reject() public
+    function MoveIt(string packlist, string description, uint256 bill_of_lading) public
     {
-        if( State != StateType.Active && State != StateType.OfferAccepted && State != StateType.OfferAccepted && State != StateType.AcceptedandPaid && State != StateType.Clearing && State != StateType.Release) {
+        InstanceShipper = msg.sender;
+        bill_of_lading = bill_of_lading;
+        Description = description;
+        PackingList = packlist;
+        State = StateType.Active;
+        ContractCreated();
+    }
+    
+    function Terminate() public
+    {
+        if( State != StateType.Active && State != StateType.AcceptedandPaid && State != StateType.Clearing && State != StateType.Release) {
             revert();
         }
         
         if (InstanceShipper != msg.sender) {
             revert();
         }
+        if (State == StateType.Terminated) {
+            revert();
+        }
         
         if (InstanceRetailer != msg.sender) {
             revert();
         }
-        State = StateType.OfferAccepted;
+        State = StateType.AcceptedandPaid;
     }
     
-    function OfferSubmitted() public
+    function OfferAccepted() public
     {
-        if (State == StateType.Active) {
-            State = StateType.OfferAccepted;
+        if (State != StateType.Terminated) {
+            State = StateType.AcceptedandPaid;
         }
         revert();
     }
     
-    function Modify(string description, uint256 Price) public
+    function Modify(uint256 bill_of_lading) public
     {
         if (State != StateType.Active)
         {
             revert();
         }
         
-        Description = description;
-        price = Price;
+        bill_of_lading = bill_of_lading;
+        ContractUpdated('Modify');
     }
     
-    function BOLPaid() public
+    function AcceptandPaid() public
     {
     if (InstanceShipper == msg.sender) {
         State = StateType.AcceptedandPaid;
@@ -78,5 +113,5 @@ contract MoveIt {
     }
     revert();
     }
-      
+    
 }

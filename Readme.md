@@ -4,7 +4,7 @@ Tether-Business is a fullstack javascript web application that tethers the gap b
 
 <br />
 <br />
-<img width="1000" height="400" alt="Tether-Business-screenshot" src="/screenshot/homepage.png">
+<img width="1000" height="400" alt="Tether-Business-screenshot" src="screenshot/app-demo.png">
 
 <br />
 
@@ -82,17 +82,6 @@ The user interface is built for easy navigation and use of the application. It i
 
 ### States
 Active, Reject, OfferAccepted, AcceptedandPaid, Clearing, Release* "Inspected"
-
-### Properties
-address public (InstanceOwner);
-    string public (Description);
-    uint public (AskingPrice);
-    StateType public (State);
-
-    address public (InstanceBuyer);
-    uint public (OfferPrice);
-    address public (InstanceInspector);
-    address public (InstanceAppraiser);
 
 ## Deployment
 
