@@ -23,7 +23,7 @@ contract WorkbenchBase {
     }
 }
 
-contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
+contract MoveApp is WorkbenchBase('MoveApp', 'MoveApp') {
     enum StateType {Active, AcceptedandPaid, Clearing, Release, Terminated}
     string public PackingList;
     string public Description;
@@ -34,7 +34,7 @@ contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
     address public InstanceShipper;
     address public InstanceAuthority;
     
-    function MoveIt(string packlist, string description, uint256 bill_of_lading) public
+    function MoveApp(string packlist, string description, uint256 bill_of_lading) public
     {
         InstanceShipper = msg.sender;
         bill_of_lading = bill_of_lading;
