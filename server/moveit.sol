@@ -24,8 +24,8 @@ contract WorkbenchBase {
 }
 
 contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
-    enum StateType {Active, OfferAccepted, AcceptedandPaid, Clearing, Release}
-    address public PackingList;
+    enum StateType {Active, AcceptedandPaid, Clearing, Release, Terminated}
+    string public PackingList;
     string public Description;
     uint public price;
     StateType public State;
@@ -34,34 +34,39 @@ contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
     address public InstanceShipper;
     address public InstanceAuthority;
     
-    function MoveIt(uint256 bill_of_lading) public
+    function MoveIt(string packlist, string description, uint256 bill_of_lading) public
     {
-        InstanceRetailer = msg.sender;
+        InstanceShipper = msg.sender;
         bill_of_lading = bill_of_lading;
+        Description = description;
+        PackingList = packlist;
         State = StateType.Active;
         ContractCreated();
     }
     
-    function Reject() public
+    function Terminate() public
     {
-        if( State != StateType.Active && State != StateType.OfferAccepted && State != StateType.OfferAccepted && State != StateType.AcceptedandPaid && State != StateType.Clearing && State != StateType.Release) {
+        if( State != StateType.Active && State != StateType.AcceptedandPaid && State != StateType.Clearing && State != StateType.Release) {
             revert();
         }
         
         if (InstanceShipper != msg.sender) {
             revert();
         }
+        if (State == StateType.Terminated) {
+            revert();
+        }
         
         if (InstanceRetailer != msg.sender) {
             revert();
         }
-        State = StateType.OfferAccepted;
+        State = StateType.AcceptedandPaid;
     }
     
-    function OfferSubmitted() public
+    function OfferAccepted() public
     {
-        if (State == StateType.Active) {
-            State = StateType.OfferAccepted;
+        if (State != StateType.Terminated) {
+            State = StateType.AcceptedandPaid;
         }
         revert();
     }
@@ -77,7 +82,7 @@ contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
         ContractUpdated('Modify');
     }
     
-    function BOLPaid() public
+    function AcceptandPaid() public
     {
     if (InstanceShipper == msg.sender) {
         State = StateType.AcceptedandPaid;
