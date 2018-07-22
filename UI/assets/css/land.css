@@ -1,0 +1,56 @@
+
+
+body {
+    
+    background: url('http://www.planwallpaper.com/static/images/46919416-hd-wallpapers.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+
+}
+.pure{
+    height: 100px;
+    width: 150;
+
+}
+.subnav {
+
+    background-color: white;
+    border-width: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.posted-by
+{
+    position: absolute;
+    bottom: 26px;
+    margin: 0 auto;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.66);
+    padding: 10px;
+    left: 45%;
+}
+.main-card {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: row;
+    justify-content: center;
+    margin: 4px;
+    padding-top: 5px;
+}
+
+#layout {
+    display: grid;
+    grid-template-columns: repeat(4, 15rem);
+    grid-template-rows: repeat(4, fit-content(15rem));
+    grid-gap: 0.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+    align-items: center;
+}
+.last-card {
+    padding-top: 60px;
+}
+.card-header {
+    background-color: #343a40
+}

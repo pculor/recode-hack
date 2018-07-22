@@ -1,0 +1,190 @@
+:root{  
+    --we_color1: rgb(51, 180, 255);
+    --we_color2: rgb(255, 174, 0);
+    --we_color3: rgb(52, 58, 64); 
+    --we_color11:rgb(104, 200, 255);
+    --we_color22: rgb(201, 188, 7);
+    --we_color33: rgb(79, 84, 90);
+    --we_color0: rgb(240, 248, 255);
+}
+
+.colorWhite{
+    color: var(--we_color0);
+}
+
+
+.jumbotron,.jumbotron-fluid {  
+    background: url(bag.jpg);
+    color: var(--we_color0);
+    background-size: 100%;
+    background-position: center;
+  }
+  
+  body{
+    background-color: whitesmoke;
+
+}
+
+  footer{
+      background-color: #000105;
+      color: var(--we_color0);
+  }
+  
+  .carousel-item img.img-fluid {
+      width: 100%;
+    
+    }
+  
+    .carousel-item {
+        height: auto;
+      }
+    
+      .weconnect{
+        color: var(--we_color1) !important;
+    }
+
+    .we{
+        color: var(--we_color2) !important;
+    }
+
+    .weconnect:hover{
+        color: var(--we_color11) !important;
+    }
+
+    .we:hover{
+        color: var(--we_color22) !important;
+    }
+  
+    #maincarousel{
+        background-color: lightgrey;
+    }
+  
+    @media (min-width: 576px){
+      #jumbotronMainText {
+          font-size: 5.5rem;
+          font-weight: 300;
+          line-height: 1.2;
+      }
+
+      
+      a.jumbotronSubText{
+        border: 3px dotted;
+        border-color: var(--we_color1); 
+        background: var(--we_color3);
+        color: var(--we_color2);
+    }
+    
+    a.jumbotronSubText:hover {
+        border: 3px dotted;
+        border-color: var(--we_color11); 
+        background: var(--we_color33);
+        color: var(--we_color22);
+    }
+    
+      .jumbotronSubText {
+        font-size: 2rem;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+      
+      .carousel-caption h2 {
+          font-size: 4rem;
+          font-weight: 300;
+          line-height: 1.2;
+          color: rgba(255, 255, 255, 0.884);
+          border-color: #b8daff;
+      }
+  
+      .carousel-caption  {
+          font-size: 1.5rem;
+          font-weight: 200;
+          line-height: 1.2;
+          color: rgba(255, 255, 255, 0.884);
+          padding: 0.75rem 1.25rem;
+          margin-bottom: 1rem;
+          border: 1px solid transparent;
+          border-radius: 0.25rem;
+          background-color: #00000086;
+          border-color: #b8daff;
+      }
+    }
+
+  
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    #mainCarousel.sticky-top {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 50px;
+      z-index: 10;
+    }
+  }
+  h3 {
+     color:darkslategrey;
+     text-align: center;
+     text-decoration-line: var(--we_color0);
+     
+  }
+  
+    
+  @media(min-width: 768px) {
+    .field-label-responsive {
+      padding-top: .5rem;
+      text-align: right;
+      background-position: var(--we_color11);
+    }
+  }
+  .container {
+      background-color: var(--we_color33);
+  }
+  .businessprofile {
+      background-color: var(--we_color0);
+      text-justify: "center";
+
+  }
+  .businessprofile-text {
+      text-align: center;
+  }
+  /*sign-up button */
+  .sign-up {
+      float:center;
+  }
+  .businessprofile-image {
+      float: center;
+  }
+  input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+/*businessprofile*/
+
+#profile-image1 {
+    cursor: pointer;
+  
+     width: 100px;
+    height: 100px;
+    border:2px solid #03b1ce ;
+}
+    .tital { font-size:16px; font-weight:500;
+    }
+     .bot-border { border-bottom:1px #f8f8f8 solid; 
+         margin:5px 0  5px 0;
+    }	
+    .profile {
+        color:#999;
+    }
+    .profile1 {
+        color:#00b1b1;
+    }
+    .form-control {
+        background-color: var(--we_color0);
+    }
+
+.pure{
+    height: 100px;
+    width: 150;
+    background: url(bag.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}

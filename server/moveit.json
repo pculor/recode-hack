@@ -1,6 +1,6 @@
 {
-    "ApplicationName": "MoveIt",
-    "DisplayName": "MoveIt Blockchain for Tether Logistics",
+    "ApplicationName": "MoveApp",
+    "DisplayName": "MoveApp Blockchain for Tether Logistics",
     "Description": "Blockchain App for the Shipping Business",
     "ApplicationRoles": [{
             "Name": "Shipper",
@@ -16,8 +16,8 @@
         }
     ],
     "Workflows": [{
-        "Name": "MoveIt",
-        "DisplayName": "MoveIt Blockchain for Tether Logistics",
+        "Name": "MoveApp",
+        "DisplayName": "MoveApp Blockchain for Tether Logistics",
         "Description": "Handles the business logic for goods shipment",
         "Initiators": ["Shipper"],
         "StartState": "Active",
