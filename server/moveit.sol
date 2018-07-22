@@ -27,6 +27,7 @@ contract MoveIt is WorkbenchBase('MoveIt', 'MoveIt') {
     enum StateType {Active, OfferAccepted, AcceptedandPaid, Clearing, Release}
     address public PackingList;
     string public Description;
+    uint public price;
     StateType public State;
 
     address public InstanceRetailer;
